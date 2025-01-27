@@ -12,10 +12,14 @@ class SearchResultListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SearchCubit, SearchState>(
       builder: (context, state) {
+        if (state is SearchInitial) {
+          return const CustomErrorWidget(
+              errorMessage: 'Please enter search text');
+        }
         if (state is SearchSuccess) {
           return ListView.builder(
               padding: EdgeInsets.zero,
-              itemCount: 10,
+              itemCount: state.books.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),

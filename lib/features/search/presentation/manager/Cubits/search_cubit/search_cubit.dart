@@ -9,11 +9,15 @@ class SearchCubit extends Cubit<SearchState> {
   SearchCubit({required this.searchRepo}) : super(SearchInitial());
   final SearchRepoImplementation searchRepo;
   Future<void> fetchSearchResult({required String query}) async {
-    emit(SearchLoading());
-    var result = await searchRepo.fetchSearchResult(query: query);
-    result.fold(
-      (failure) => emit(SearchFailure(errorMessage: failure.errorMessage)),
-      (books) => emit(SearchSuccess(books: books)),
-    );
+    if (query.isEmpty) {
+      emit(SearchInitial());
+    } else {
+      emit(SearchLoading());
+      var result = await searchRepo.fetchSearchResult(query: query);
+      result.fold(
+        (failure) => emit(SearchFailure(errorMessage: failure.errorMessage)),
+        (books) => emit(SearchSuccess(books: books)),
+      );
+    }
   }
 }

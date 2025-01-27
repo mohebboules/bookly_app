@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bookly_app/core/utilities/styles.dart';
 import 'package:bookly_app/features/search/presentation/manager/Cubits/search_cubit/search_cubit.dart';
 import 'package:bookly_app/features/search/presentation/views/widgets/custom_search_text_field.dart';
@@ -5,8 +7,27 @@ import 'package:bookly_app/features/search/presentation/views/widgets/search_res
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SearchViewBody extends StatelessWidget {
+class SearchViewBody extends StatefulWidget {
   const SearchViewBody({super.key});
+
+  @override
+  State<SearchViewBody> createState() => _SearchViewBodyState();
+}
+
+class _SearchViewBodyState extends State<SearchViewBody> {
+  Timer? debounce;
+
+  @override
+  void initState() {
+    BlocProvider.of<SearchCubit>(context).fetchSearchResult(query: '');
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    debounce?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +38,7 @@ class SearchViewBody extends StatelessWidget {
         children: [
           CustomSearchTextField(
             onChanged: (query) {
-              BlocProvider.of<SearchCubit>(context)
-                  .fetchSearchResult(query: query);
+              onSearchChanged(context, query);
             },
           ),
           const SizedBox(
@@ -37,5 +57,17 @@ class SearchViewBody extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void onSearchChanged(BuildContext context, String query) {
+    if (debounce?.isActive ?? false) debounce!.cancel();
+
+    debounce = Timer(const Duration(milliseconds: 500), () {
+      if (query.isEmpty) {
+        BlocProvider.of<SearchCubit>(context).fetchSearchResult(query: '');
+      } else {
+        BlocProvider.of<SearchCubit>(context).fetchSearchResult(query: query);
+      }
+    });
   }
 }
