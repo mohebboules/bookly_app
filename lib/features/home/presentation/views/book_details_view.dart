@@ -15,8 +15,11 @@ class BookDetailsView extends StatelessWidget {
       create: (context) =>
           SimilarBooksCubit(getIt.get<HomeRepoImplementation>())
             ..fetchSimilarBooks(category: bookModel.volumeInfo.categories![0]),
-      child: const Scaffold(
-        body: SafeArea(child: BookDetailsViewBody()),
+      child: Scaffold(
+        body: SafeArea(
+            child: BookDetailsViewBody(
+          bookModel: bookModel,
+        )),
       ),
     );
   }

@@ -1,9 +1,10 @@
 import 'package:bookly_app/core/widgets/custom_button.dart';
+import 'package:bookly_app/features/home/data/models/book_model/book_model.dart';
 import 'package:flutter/material.dart';
 
 class BooksAction extends StatelessWidget {
-  const BooksAction({super.key});
-
+  const BooksAction({super.key, required this.book});
+  final BookModel book;
   @override
   Widget build(BuildContext context) {
     return const Padding(
@@ -18,7 +19,7 @@ class BooksAction extends StatelessWidget {
               topLeft: Radius.circular(16),
               bottomLeft: Radius.circular(16),
             ),
-            title: '19.99 €',
+            title: 'Free',
           )),
           Expanded(
               child: CustomButton(
@@ -29,7 +30,7 @@ class BooksAction extends StatelessWidget {
               bottomRight: Radius.circular(16),
             ),
             fontSize: 16,
-            title: 'Free Preview',
+            title: 'Preview',
           )),
         ],
       ),
