@@ -13,7 +13,9 @@ class SearchRepoImplementation implements SearchRepo {
   Future<Either<Failure, List<BookModel>>> fetchSearchResult(
       {required String query}) async {
     try {
-      var data = await apiService.get(endPoint: 'volumes?q=$query');
+      var data = await apiService.get(
+          endPoint:
+              'volumes?q=$query&Sorting=relevance&Filtering=free-ebooks&projection=full&langRestrict=en');
       List<BookModel> books = [];
       for (var item in data['items']) {
         books.add(BookModel.fromJson(item));
