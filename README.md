@@ -20,14 +20,14 @@ Bookly is a Flutter-based mobile application that provides users with an interac
 
 ## 📷 Screenshots
 
-### Home Screen
-![Home Screen](assets/screenshots/Home.png)
+<h3>Home Screen</h3>
+<img src="assets/screenshots/Home.png" width="300">
 
-### Search Screen
-![Search Screen](assets/screenshots/Search.png)
+<h3>Search Screen</h3>
+<img src="assets/screenshots/Search.png" width="300">
 
-### Book Details
-![Book Details](assets/screenshots/Details.png)
+<h3>Book Details</h3>
+<img src="assets/screenshots/Details.png" width="300">
 
 ## 🏗️ Installation & Setup
 
