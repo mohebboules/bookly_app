@@ -16,9 +16,18 @@ Bookly is a Flutter-based mobile application that provides users with an interac
 - **HTTP API Integration** – Fetching book data dynamically.
 - **BlOC** – State management.
 
+
+
 ## 📷 Screenshots
 
+### Home Screen
+![Home Screen](assets/screenshots/Home.png)
 
+### Search Screen
+![Search Screen](assets/screenshots/Search.png)
+
+### Book Details
+![Book Details](assets/screenshots/Details.png)
 
 ## 🏗️ Installation & Setup
 
